@@ -1,0 +1,106 @@
+body {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:16px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: normal;
+	color: #333;
+	background:#f0f0f0;
+}
+.bold {
+	font-weight:bold;
+}
+.italic {
+	font-style:italic;
+}
+
+a, a:visited {
+	text-decoration:none;
+	color:#3583f2;
+}
+a:hover, a:active {
+	color:#0f67e5;
+}
+
+header {
+	
+}
+
+header h1 {
+	background: url('https://minecraft.net/images/bg_top.png');
+	background-color: #593d29;
+	color: white;
+	line-height: 48px;
+	font-weight: 300;
+	margin: 0;
+	text-align: center;
+	text-shadow: 0.1em 0.1em 0.1em rgba(255,255,255,0.5);
+}
+
+header h2 {
+	background: url('https://minecraft.net/images/bg_main.png');
+	color: white;
+	line-height: 48px;
+	font-weight: normal;
+	margin-top: 0;
+	padding: 0 0.5em;
+	background: #222;
+}
+
+main {
+	margin: 1em;
+}
+
+form {
+	margin: 0 auto;
+	width: 28em;
+}
+
+input[name="picker"] {
+	border:0;
+	height: 150px;
+	width: 150px;
+	float: left;
+	padding: 0;
+	margin-top: -4px;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+input[name="h"] {
+	display: block;
+	border: 1px solid #333;
+	margin: 0;
+	margin-bottom: 1em;
+	padding: 0 0.5em;
+	font-size: 1rem;
+	line-height: 1.5em;
+	border-radius: 3px;
+	width: 15.3em;
+}
+
+input[type="number"] {
+	border: 1px solid #333;
+	margin: 0;
+	padding: 0 0.5em;
+	font-size: 1rem;
+	line-height: 1.5em;
+	border-radius: 3px;
+	width: 3em;
+}
+
+input[name="output"] {
+	display: block;
+	border: 1px solid #333;
+	margin: 0;
+	padding: 0 0.5em;
+	font-size: 1rem;
+	line-height: 1.5em;
+	border-radius: 3px;
+	width: 25.6em;
+}
+
+footer {
+	text-align: right;
+}

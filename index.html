@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" media="screen" type="text/css" href="stylesheet.css"/>
+		
+		<link rel="icon" type="image/png" href="favicon.png">
+		<title>Armor Color Code Generator</title>
+		
+		<meta name="author" content="Tiger Oakes">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', 'UA-46761706-1', '8islandlabs.com');
+			ga('send', 'pageview');
+			
+		</script>
+	</head>
+	<body>
+		<a href="https://github.com/NotWoods/minecraft-color-generator">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub">
+		</a>
+		<header>
+			<h1>Minecraft</h1>
+			<h2>Armor Color Code Generator</h2>
+		</header>
+		<main>
+			<form name="color">
+				<input type="color" onchange="colorFillerHex(this.form.picker.value)" name="picker">
+				<input type="text" name="h" placeholder="Hex Value" onchange="colorFillerHex(this.form.h.value)" maxlength="6">
+				R: <input type="number" name="r" placeholder="R" min="0" max="255" onchange="colorFillerRGB()">
+				G: <input type="number" name="g" placeholder="G" min="0" max="255" onchange="colorFillerRGB()">
+				B: <input type="number" name="b" placeholder="B" min="0" max="255" onchange="colorFillerRGB()">
+				
+				<input type="text" name="output" placeholder="Minecraft Color Code" readonly="readonly">
+			</form>
+			<div>
+				<h2>Using this code in game</h2>
+				<code id="code">/give @p leather_chestplate 1 0 {display:{color:&#60;colorCode&#62;}}</code><br>
+				<a href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/">More commands on the Minecraft Forum</a>
+			</div>
+			<hr>
+			<footer>
+				Created by <a href="http://tigeroakes.com">Tiger Oakes</a><br>
+				Armor Color Code Generator © 2014 Tiger Oakes<br>
+				Mojang © 2009-2014. "Minecraft" is a trademark of Notch Development AB
+			</footer>
+			
+			<script>
+				function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+				function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+				function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+				function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+				function componentToHex(c) {var hex = c.toString(16); return hex.length == 1 ? "0" + hex : hex;}
+				function rgbToHex(r, g, b) {return "#" + componentToHex(parseInt(r)) + componentToHex(parseInt(g)) + componentToHex(parseInt(b));}
+				
+				function colorFillerHex(value) {
+					console.log(value);
+					
+					document.color.picker.value = "#" + cutHex(value);
+					document.color.h.value = cutHex(value);
+					document.color.picker.style.background = "#" + cutHex(value);
+					
+					document.color.r.value = hexToR(value);
+					document.color.g.value = hexToG(value); 
+					document.color.b.value = hexToB(value);
+					
+					result(hexToR(value),hexToG(value),hexToB(value));
+				}
+				
+				function colorFillerRGB() {	
+					red = document.color.r.value;
+					green = document.color.g.value;
+					blue = document.color.b.value;
+					
+					console.log(red + ", " + green + ", " + blue);
+					value = rgbToHex(red, green, blue);
+					console.log(value);
+					
+					document.color.picker.value = "#" + cutHex(value);
+					document.color.h.value = cutHex(value);
+					document.color.picker.style.background = "#" + cutHex(value);
+					
+					result(red,green,blue);
+				}
+				
+				function result(red,green,blue) {
+					newCode = blue + 256 * green + 65536 * red;
+					
+					document.color.output.value = newCode;
+					document.getElementById('code').innerHTML = "/give @p leather_chestplate 1 0 {display:{color:" + newCode + "}}"; 
+					return newCode;
+				}
+			</script>
+		</main>
+	</body>
+</html>
