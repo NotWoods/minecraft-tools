@@ -44,13 +44,58 @@
 				<code id="code">/give @p leather_chestplate 1 0 {display:{color:&#60;colorCode&#62;}}</code><br>
 				<a href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/">More commands on the Minecraft Forum</a>
 			</div>
+			<canvas id="armor" width="64" height="64">
+				<img src="favicon.png">
+			</canvas>
 			<hr>
 			<footer>
 				Created by <a href="http://tigeroakes.com">Tiger Oakes</a><br>
 				Armor Color Code Generator © 2014 Tiger Oakes<br>
 				Mojang © 2009-2014. "Minecraft" is a trademark of Notch Development AB
 			</footer>
-			
+			<script>
+				var x; //drawing context
+				var width;
+				var height;
+				var fg;
+				var buffer
+				
+				function canvasDraw(hex) {
+					var drawingCanvas = document.getElementById('armor');
+					// Check the element is in the DOM and the browser supports canvas
+					if(drawingCanvas && drawingCanvas.getContext) {
+						// Initaliase a 2-dimensional drawing context
+						x = drawingCanvas.getContext('2d');
+						width = x.canvas.width;
+						height = x.canvas.height;
+				
+						fg = new Image();
+						fg.src = 'armor.png';
+				
+						// create offscreen buffer, 
+						buffer = document.createElement('canvas');
+						buffer.width = fg.width;
+						buffer.height = fg.height;
+						bx = buffer.getContext('2d');
+				
+						// fill offscreen buffer with the tint color
+						bx.fillStyle = hex;
+						bx.fillRect(0,0,buffer.width,buffer.height);
+				
+						// destination atop makes a result with an alpha channel identical to fg, but with all pixels retaining their original color *as far as I can tell*
+						bx.globalCompositeOperation = "destination-atop";
+						bx.drawImage(fg,0,0);
+				
+				
+						// to tint the image, draw it first
+						x.drawImage(fg,0,0);
+				
+						//then set the global alpha to the amound that you want to tint it, and draw the buffer directly on top of it.
+						x.globalAlpha = 0.5;
+						x.drawImage(buffer,0,0);
+					}
+				}
+			</script>
 			<script>
 				function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
 				function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
@@ -71,6 +116,7 @@
 					document.color.b.value = hexToB(value);
 					
 					result(hexToR(value),hexToG(value),hexToB(value));
+					canvasDraw("#" + cutHex(value));
 				}
 				
 				function colorFillerRGB() {	
@@ -86,7 +132,8 @@
 					document.color.h.value = cutHex(value);
 					document.color.picker.style.background = "#" + cutHex(value);
 					
-					result(red,green,blue);
+					result(hexToR(value),hexToG(value),hexToB(value));
+					canvasDraw("#" + cutHex(value));
 				}
 				
 				function result(red,green,blue) {
@@ -94,6 +141,7 @@
 					
 					document.color.output.value = newCode;
 					document.getElementById('code').innerHTML = "/give @p leather_chestplate 1 0 {display:{color:" + newCode + "}}"; 
+					
 					return newCode;
 				}
 			</script>

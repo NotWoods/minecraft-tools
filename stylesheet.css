@@ -101,6 +101,12 @@ input[name="output"] {
 	width: 25.6em;
 }
 
+#armor {
+	margin: 0 auto;
+	width: 64px;
+	display: block;
+}
+
 footer {
 	text-align: right;
 }
