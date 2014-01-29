@@ -24,28 +24,25 @@ a:hover, a:active {
 }
 
 header {
-	
+	background: #1d1d1d;
+	color: white;
+	box-shadow: 0 0.3em 0.3em rgba(0,0,0,0.5);
+}
+
+header img {
+	height: 5em;
+	vertical-align: middle;
 }
 
 header h1 {
-	background: url('https://minecraft.net/images/bg_top.png');
-	background-color: #593d29;
-	color: white;
-	line-height: 48px;
 	font-weight: 300;
-	margin: 0;
-	text-align: center;
-	text-shadow: 0.1em 0.1em 0.1em rgba(255,255,255,0.5);
+	display: inline;
+	margin: 0 0.3em;
 }
 
 header h2 {
-	background: url('https://minecraft.net/images/bg_main.png');
-	color: white;
-	line-height: 48px;
-	font-weight: normal;
-	margin-top: 0;
-	padding: 0 0.5em;
-	background: #222;
+	font-weight: 300;
+	margin: 0 0.3em;
 }
 
 main {
@@ -109,4 +106,23 @@ input[name="output"] {
 
 footer {
 	text-align: right;
+	background: #1d1d1d;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: white;
+	width: 100%;
+	box-shadow: 0 -0.3em 0.3em rgba(0,0,0,0.5);
+}
+
+@media screen and (max-width: 28em) {
+	form {
+		width: 16.4em;
+	}
+	input[name="picker"] {
+		width: 100%;
+	}
+	input[name="output"] {
+		width: 15.3em;
+	}
 }
