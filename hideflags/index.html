@@ -1,47 +1,32 @@
 ---
 title: HideFlags Calculator
+script: true
 ---
 <form name="hide">
 	<h2>Parts of the tooltip to hide</h2>
 	<ul class="invisible">
 		<li>
-			<input
-				type="checkbox" id="enchant" data-value="1"
-				onchange="result()"
-			>
+			<input type="checkbox" id="enchant" data-value="1">
 			<label for="enchant">Enchantments</label>
 		</li>
 		<li>
-			<input
-				type="checkbox" id="mod" data-value="2"
-				onchange="result()"
-			>
+			<input type="checkbox" id="mod" data-value="2">
 			<label for="mod">Modifiers</label>
 		</li>
 		<li>
-			<input
-				type="checkbox" id="unbreak" data-value="4"
-				onchange="result()"
-			>
+			<input type="checkbox" id="unbreak" data-value="4">
 			<label for="unbreak">Unbreakable</label>
 		</li>
 		<li>
-			<input
-				type="checkbox" id="destroy" data-value="8"
-				onchange="result()"
-			>
+			<input type="checkbox" id="destroy" data-value="8">
 			<label for="destroy">CanDestroy</label>
 		</li>
 		<li>
-			<input
-				type="checkbox" id="place" data-value="16"
-				onchange="result()"
-			>
+			<input type="checkbox" id="place" data-value="16">
 			<label for="place">CanPlace</label>
 		</li>
 	</ul>
-</form>
-<form name="resultNum">
+
 	<input
 		id="result" class="result" type="text" name="output"
 		placeholder="HideFlags Value" readonly
@@ -55,26 +40,3 @@ title: HideFlags Calculator
 <a href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/">
 	More commands on the Minecraft Forum
 </a>
-
-<script>
-	function result() {
-		var bits = new Array();
-		var total = 0;
-
-		for (var i = 0; i < document.hide.elements.length; i++) {
-			if (document.hide.elements[i].checked) {
-				bits[i] = parseInt(document.hide.elements[i].dataset.value);
-			} else {
-				bits[i] = 0;
-			}
-		}
-
-		for (var x = 0; x < bits.length; x++) {
-			total += bits[x];
-		}
-
-		document.getElementById('code').innerHTML = "/give @p iron_pickaxe 1 0 {HideFlags:" + total + "}";
-		document.resultNum.output.value = total;
-		return total;
-	}
-</script>

@@ -42,5 +42,9 @@
 		<main class="center">
 			{{ content }}
 		</main>
+
+		{% if page.script %}
+			<script defer src="script.js"></script>
+		{% endif %}
 	</body>
 </html>

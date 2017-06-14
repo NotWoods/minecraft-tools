@@ -1,5 +1,6 @@
 ---
 title: Armor Color Code Generator
+script: true
 ---
 <style>
 	input[name="picker"] {
@@ -19,30 +20,14 @@ title: Armor Color Code Generator
 </style>
 
 <form name="color">
-	<input
-		type="color" name="picker" class="picker"
-		onchange="colorFillerHex(this.form.picker.value)"
-	>
-	<input
-		type="text" name="h" placeholder="Hex Value" maxlength="6"
-		onchange="colorFillerHex(this.form.h.value)"
-	>
+	<input type="color" name="picker" class="picker">
+	<input type="text" name="h" placeholder="Hex Value" maxlength="6">
 
 	<br>
-	<input
-		type="number" name="r" placeholder="R" min="0" max="255"
-		onchange="colorFillerRGB()"
-	>
-	<input
-		type="number" name="g" placeholder="G" min="0" max="255"
-		onchange="colorFillerRGB()"
-	>
-	<input
-		type="number" name="b" placeholder="B" min="0" max="255"
-		onchange="colorFillerRGB()"
-	>
+	<input type="number" name="r" placeholder="R" min="0" max="255">
+	<input type="number" name="g" placeholder="G" min="0" max="255">
+	<input type="number" name="b" placeholder="B" min="0" max="255">
 
-	<br>
 	<input
 		class="result" id="result" type="text" name="output"
 		placeholder="Minecraft Color Code" readonly
@@ -56,102 +41,3 @@ title: Armor Color Code Generator
 <a href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/">
 	More commands on the Minecraft Forum
 </a>
-
-<canvas id="armor" width="64" height="64" style="display:none">
-	<img src="armor.png">
-</canvas>
-
-<script>
-	var x; //drawing context
-	var width;
-	var height;
-	var fg;
-	var buffer
-
-	function canvasDraw(hex) {
-		var drawingCanvas = document.getElementById('armor');
-		// Check the element is in the DOM and the browser supports canvas
-		if(drawingCanvas && drawingCanvas.getContext) {
-			// Initaliase a 2-dimensional drawing context
-			x = drawingCanvas.getContext('2d');
-			width = x.canvas.width;
-			height = x.canvas.height;
-
-			fg = new Image();
-			fg.src = 'armor.png';
-
-			// create offscreen buffer,
-			buffer = document.createElement('canvas');
-			buffer.width = fg.width;
-			buffer.height = fg.height;
-			bx = buffer.getContext('2d');
-
-			// fill offscreen buffer with the tint color
-			bx.fillStyle = hex;
-			bx.fillRect(0,0,buffer.width,buffer.height);
-
-			// destination atop makes a result with an alpha channel identical to fg, but with all pixels retaining their original color *as far as I can tell*
-			bx.globalCompositeOperation = "destination-atop";
-			bx.drawImage(fg,0,0);
-
-
-			// to tint the image, draw it first
-			x.drawImage(fg,0,0);
-
-			//then set the global alpha to the amound that you want to tint it, and draw the buffer directly on top of it.
-			x.globalAlpha = 0.5;
-			x.drawImage(buffer,0,0);
-		}
-	}
-</script>
-<script>
-	function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
-	function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
-	function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
-	function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
-	function componentToHex(c) {var hex = c.toString(16); return hex.length == 1 ? "0" + hex : hex;}
-	function rgbToHex(r, g, b) {return "#" + componentToHex(parseInt(r)) + componentToHex(parseInt(g)) + componentToHex(parseInt(b));}
-
-	function colorFillerHex(value) {
-		console.log(value);
-		if (value.length < 6) return;
-
-		document.color.picker.value = "#" + cutHex(value);
-		document.color.h.value = cutHex(value);
-		document.color.picker.style.background = "#" + cutHex(value);
-
-		document.color.r.value = hexToR(value);
-		document.color.g.value = hexToG(value);
-		document.color.b.value = hexToB(value);
-
-		result(hexToR(value),hexToG(value),hexToB(value));
-		canvasDraw("#" + cutHex(value));
-	}
-
-	function colorFillerRGB() {
-		red = document.color.r.value;
-		green = document.color.g.value;
-		blue = document.color.b.value;
-		if (red == "" || green == "" || blue == "") return;
-
-		console.log(red + ", " + green + ", " + blue);
-		value = rgbToHex(red, green, blue);
-		console.log(value);
-
-		document.color.picker.value = "#" + cutHex(value);
-		document.color.h.value = cutHex(value);
-		document.color.picker.style.background = "#" + cutHex(value);
-
-		result(hexToR(value),hexToG(value),hexToB(value));
-		canvasDraw("#" + cutHex(value));
-	}
-
-	function result(red,green,blue) {
-		newCode = blue + 256 * green + 65536 * red;
-
-		document.color.output.value = newCode;
-		document.getElementById('code').innerHTML = "/give @p leather_chestplate 1 0 {display:{color:" + newCode + "}}";
-
-		return newCode;
-	}
-</script>
