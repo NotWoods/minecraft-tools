@@ -7,7 +7,11 @@ function rgbToHex(r, g, b) {return "#" + componentToHex(parseInt(r)) + component
 
 function colorFillerHex(value) {
 	console.log(value);
-	if (value.length < 6) return;
+	if (value.length === 3) {
+		value = value.split('')
+			.map(function (char) { return char + char })
+			.join('');
+	} else if (value.length < 6) return;
 
 	document.color.picker.value = "#" + cutHex(value);
 	document.color.h.value = cutHex(value);
@@ -21,9 +25,9 @@ function colorFillerHex(value) {
 }
 
 function colorFillerRGB() {
-	red = document.color.r.value;
-	green = document.color.g.value;
-	blue = document.color.b.value;
+	var red = document.color.r.value;
+	var green = document.color.g.value;
+	var blue = document.color.b.value;
 	if (red == "" || green == "" || blue == "") return;
 
 	console.log(red + ", " + green + ", " + blue);
