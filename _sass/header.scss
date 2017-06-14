@@ -1,0 +1,49 @@
+$header-background: #263238;
+$nav-background: #37474f;
+
+.page-header {
+	background-color: $header-background;
+	color: white;
+}
+
+.page-title {
+	font-weight: 300;
+
+	margin: 0 -0.5rem;
+	padding: 0.5rem 0;
+}
+
+.navigation-container {
+	background-color: $nav-background;
+}
+.nav-link-here {
+	background-color: $header-background;
+}
+
+.site-title {
+	font-weight: bold;
+	font-size: 1em;
+
+	margin: 0;
+	margin-right: 1em;
+	display: inline-block;
+}
+
+.navigation {
+	display: inline-block;
+}
+
+.nav-link-container {
+	display: inline-block;
+}
+
+.nav-link {
+	transition: background-color 0.3s ease;
+
+	display: block;
+	line-height: 2em;
+	padding: 0 0.5em;
+}
+.nav-link:hover {
+	background-color: $header-background;
+}

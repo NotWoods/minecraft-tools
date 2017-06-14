@@ -1,0 +1,73 @@
+---
+title: HideFlags Calculator
+---
+<form name="hide">
+	<h2>Parts of the tooltip to hide</h2>
+	<input
+		type="checkbox" name="enchant" value="1"
+		onchange="result()"
+	>
+	Enchantments
+	<br>
+	<input
+		type="checkbox" name="mod" value="2"
+		onchange="result()"
+	>
+	Modifiers
+	<br>
+	<input
+		type="checkbox" name="unbreak" value="4"
+		onchange="result()"
+	>
+	Unbreakable
+	<br>
+	<input
+		type="checkbox" name="destroy" value="8"
+		onchange="result()"
+	>
+	CanDestroy
+	<br>
+	<input
+		type="checkbox" name="place" value="16"
+		onchange="result()"
+	>
+	CanPlace
+</form>
+<form name="resultNum">
+	<input
+		id="result" type="text" name="output"
+		placeholder="HideFlags Value" readonly="readonly"
+	>
+</form>
+<div>
+	<h2>Using this code in game</h2>
+	<code id="code">/give @p iron_pickaxe 1 0 {HideFlags:&#60;bitField&#62;}</code>
+	<br>
+	<a
+		href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/"
+	>
+		More commands on the Minecraft Forum
+	</a>
+</div>
+<script>
+	function result() {
+		var bits = new Array();
+		var total = 0;
+
+		for (var i = 0; i < document.hide.elements.length; i++) {
+			if (document.hide.elements[i].checked) {
+				bits[i] = parseInt(document.hide.elements[i].value);
+			} else {
+				bits[i] = 0;
+			}
+		}
+
+		for (var x = 0; x < bits.length; x++) {
+			total += bits[x];
+		}
+
+		document.getElementById('code').innerHTML = "/give @p iron_pickaxe 1 0 {HideFlags:" + total + "}";
+		document.resultNum.output.value = total;
+		return total;
+	}
+</script>

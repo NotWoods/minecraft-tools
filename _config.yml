@@ -1,0 +1,7 @@
+title: Minecraft Tools
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

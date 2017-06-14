@@ -1,0 +1,46 @@
+---
+---
+<!doctype html>
+<html>
+	<head>
+		{% include head.liquid %}
+		<link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+		<link rel="icon" type="image/png" href="favicon.png">
+	</head>
+	<body>
+		<header class="page-header">
+			<nav class="navigation-container">
+				<div class="center">
+					<h2 class="site-title">{{ site.title }}</h2>
+					<ul class="navigation invisible">
+						{% for nav in site.data.navigation %}
+							<li class="nav-link-container">
+							{% if nav.link == page.url %}
+								<a
+									class="invisible nav-link nav-link-here"
+									href="{{ nav.link | relative_url }}"
+								>
+									{{ nav.title }}
+								</a>
+							{% else %}
+								<a
+									class="invisible nav-link"
+									href="{{ nav.link | relative_url }}"
+								>
+									{{ nav.title }}
+								</a>
+							{% endif %}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</nav>
+			<div class="center">
+				<h1 class="page-title">{{ page.title }}</h1>
+			</div>
+		</header>
+		<main class="center">
+			{{ content }}
+		</main>
+	</body>
+</html>

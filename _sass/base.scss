@@ -1,0 +1,48 @@
+body {
+	font-family: system-ui;
+	background-color: #f5f5f5;
+	color: #333;
+
+	margin: 0;
+}
+
+// Standard link styles
+a {
+	color: #3583f2;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+a:hover {
+	color: #0f67e5;
+}
+a:active {
+	text-decoration: underline;
+}
+
+// Center items in the page
+.center {
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 0 1em;
+}
+
+// The 'invisible' class.
+// Remove styles and keep functionality
+a.invisible {
+	color: inherit;
+}
+a.invisible:hover {
+	color: inherit;
+}
+ul.invisible {
+	list-style-type: none;
+
+	margin: 0;
+	padding: 0;
+}
+
+// Misc
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin-bottom: 0.25em;
+}
