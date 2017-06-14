@@ -71,3 +71,38 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link:hover {
   background-color: #263238; }
+
+input[type=text], input[type=number] {
+  border: 0;
+  border-bottom: 2px solid #757575;
+  background: transparent;
+  font: inherit;
+  margin: 0;
+  padding: 0.5rem; }
+
+input[type=color]::-webkit-color-swatch-wrapper {
+  padding: 0; }
+
+input[type=color]::-webkit-color-swatch {
+  border: 0; }
+
+input[type=color] {
+  border: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 64px;
+  height: 64px; }
+
+input.result {
+  border-style: dashed;
+  font-size: 1.25rem;
+  display: block;
+  margin: 1rem 0;
+  width: calc(100% - 1rem); }
+
+.demo-command {
+  font-size: 1.25em;
+  display: block;
+  padding: 0.5em; }

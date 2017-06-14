@@ -1,10 +1,26 @@
 ---
 title: Armor Color Code Generator
-icon: /color.png
 ---
-<form name="color" class="center">
+<style>
+	input[name="picker"] {
+		float: left;
+		margin-top: 1rem;
+		margin-right: 1rem;
+	}
+
+	input[name="h"] {
+		margin: 1rem 0;
+		width: 11.5em;
+	}
+
+	input[name="r"], input[name="g"], input[name="b"] {
+		width: 3em;
+	}
+</style>
+
+<form name="color">
 	<input
-		type="color" name="picker"
+		type="color" name="picker" class="picker"
 		onchange="colorFillerHex(this.form.picker.value)"
 	>
 	<input
@@ -28,19 +44,16 @@ icon: /color.png
 
 	<br>
 	<input
-		id="result" type="text" name="output"
-		placeholder="Minecraft Color Code" readonly="readonly"
+		class="result" id="result" type="text" name="output"
+		placeholder="Minecraft Color Code" readonly
 	>
 </form>
 
-<h2>Using this code in game</h2>
-<code id="code">
+<h3>Using this code in game:</h3>
+<code id="code" class="demo-command">
 	/give @p leather_chestplate 1 0 {display:{color:&#60;colorCode&#62;}}
 </code>
-<a
-	href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/"
-	class="center"
->
+<a href="http://www.minecraftforum.net/topic/1969520-17-using-summon-give-datatags-in-map-making-tutorials/">
 	More commands on the Minecraft Forum
 </a>
 
