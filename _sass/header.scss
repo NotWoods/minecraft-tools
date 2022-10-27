@@ -41,9 +41,22 @@ $nav-background: #37474f;
 	transition: background-color 0.3s ease;
 
 	display: block;
-	line-height: 2em;
+	line-height: 3em;
 	padding: 0 0.5em;
 }
 .nav-link:hover {
 	background-color: $header-background;
+}
+
+.navigation-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.about {
+	margin-left: auto;
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
 }

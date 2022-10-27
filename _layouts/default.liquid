@@ -10,7 +10,7 @@
 	<body>
 		<header class="page-header">
 			<nav class="navigation-container">
-				<div class="center">
+				<div class="center navigation-tabs">
 					<h1 class="site-title">{{ site.title }}</h1>
 					<ul class="navigation invisible">
 						{% for nav in site.data.navigation %}
@@ -33,6 +33,9 @@
 							</li>
 						{% endfor %}
 					</ul>
+					<a href="https://tigeroakes.com" class="about invisible nav-link">
+						Created by <img src="{{ '/tigeroakes.svg' | relative_url }}" alt="Tiger Oakes" width="160" height="32" />
+					</a>
 				</div>
 			</nav>
 			<div class="center">
