@@ -1,9 +1,8 @@
-// @ts-check
 var form = document.querySelector("form");
 var code = document.getElementById("code");
 var result = document.getElementById("result");
 
-function result() {
+function calculateResult() {
   /** @type {RadioNodeList} List of hideflag checkboxes */
   var checkboxes = form.elements.namedItem("hide");
   // Parse all the bit values from the "value" attribute
@@ -25,6 +24,6 @@ function result() {
   return total;
 }
 
-document.querySelectorAll('input[type="checkbox"]').forEach(function (element) {
-  element.addEventListener("change", result);
-});
+document
+  .getElementById("hideflags")
+  .addEventListener("change", calculateResult);
