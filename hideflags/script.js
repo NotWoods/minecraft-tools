@@ -1,27 +1,28 @@
+// @ts-check
+var form = document.querySelector("form");
+var code = document.getElementById("code");
+var result = document.getElementById("result");
+
 function result() {
-	var bits = new Array();
-	var total = 0;
+  /** @type {RadioNodeList} List of hideflag checkboxes */
+  var checkboxes = form.elements.namedItem("hide");
+  // Parse all the bit values from the "value" attribute
+  var bits = Array.from(checkboxes).map(function (checkbox) {
+    if (checkbox.checked) {
+      return parseInt(checkbox.value, 10);
+    } else {
+      return 0;
+    }
+  });
 
-	for (var i = 0; i < document.hide.elements.length; i++) {
-		var element = document.hide.elements[i];
-		if (element.checked) {
-			bits[i] = parseInt(element.dataset.value);
-		} else {
-			bits[i] = 0;
-		}
-	}
+  // Sum together the bit values
+  var total = bits.reduce(function sum(accumulator, bit) {
+    return accumulator + bit;
+  });
 
-	for (var x = 0; x < bits.length; x++) {
-		total += bits[x];
-	}
-
-	document.getElementById('code').innerHTML =
-		'/give @p iron_pickaxe 1 0 {HideFlags:' + total + '}';
-	document.getElementById('result').value = total;
-	return total;
+  code.innerHTML = "/give @p iron_pickaxe 1 0 {HideFlags:" + total + "}";
+  result.value = total;
+  return total;
 }
 
-document.querySelectorAll('input[type="checkbox"]')
-	.forEach(function (element) {
-		element.addEventListener('change', result);
-	})
+document.getElementById("hideflags").addEventListener("change", result);
