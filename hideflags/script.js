@@ -25,4 +25,6 @@ function result() {
   return total;
 }
 
-document.getElementById("hideflags").addEventListener("change", result);
+document.querySelectorAll('input[type="checkbox"]').forEach(function (element) {
+  element.addEventListener("change", result);
+});
